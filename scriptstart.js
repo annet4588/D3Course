@@ -16,7 +16,7 @@ const y = d3.scaleLinear()
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
-        .attr("tranform", `translate(${margin.left}, ${margin.top})`);
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Create a fake dataset
 const dataset = [
@@ -46,3 +46,7 @@ svg.append("g")
   .call(d3.axisBottom(x)
     .ticks(d3.timeMonth.every(1))         // Format how many ticks/what interval
     .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
+
+// Add y-axis
+svg.append("g")
+  .call(d3.axisLeft(y))
