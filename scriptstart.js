@@ -48,11 +48,24 @@ svg.selectAll(".tick text") // Grab the tick text to
 
 // Add y-axis
 svg.append("g")
+  .style("font-size", "14px")
   .call(d3.axisLeft(y)
-  .ticks((d3.max(data, d => d.population) - 65000)/ 5000) // Make the size limited to every 5000 population
-  .tickFormat(d => {
-    return `${(d / 1000).toFixed(0)}k`;
-  }))
+    .ticks((d3.max(data, d => d.population) - 65000)/ 5000) // Make the size limited to every 5000 population
+    .tickFormat(d => {
+      return `${(d / 1000).toFixed(0)}k`;
+    })
+    .tickSize(0)
+    .tickPadding(10))
+  .call(g => g.select(".domain").remove())
+  .selectAll(".tick text")
+  .style("fill", "#777") 
+  .style("visibility", (d, i, nodes) => {  // Removes the bottom axis tick
+    if (i === 0) {
+        return "hidden"; 
+    } else {
+        return "visible"; 
+    }
+    });
 
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
