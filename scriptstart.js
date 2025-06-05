@@ -50,3 +50,16 @@ svg.append("g")
 // Add y-axis
 svg.append("g")
   .call(d3.axisLeft(y))
+
+// Create line generator that maps each data point to an x and y position based on the scales
+const line = d3.line()
+  .x(d => x(d.date)) // Use the x scale to position dates
+  .y(d => y(d.value)); // Use the y scale to position values
+
+// Add line path to SVG element
+svg.append("path")
+  .datum(dataset)  // Binds the dataset to the path
+  .attr("fill", "none")  // No fill under the line
+  .attr("stroke", "steelblue") // Set the line color
+  .attr("stroke-width", 1) // Sets the thickness of the line
+  .attr("d", line); // Use the line generator to create the path
