@@ -42,7 +42,7 @@ y.domain([0, d3.max(dataset, d => d.value)]); //The rangle starts from 0 and up 
 
 // Add x-axis
 svg.append("g")
-//   .attr("transform", `translate(0, ${height})`)
+  .attr("transform", `translate(0, ${height})`) // Moves(translates) the x-axis group element to the bottom of the chart
   .call(d3.axisBottom(x)
     .ticks(d3.timeMonth.every(1))         // Format how many ticks/what interval
     .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
