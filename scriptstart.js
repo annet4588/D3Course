@@ -25,15 +25,12 @@ d3.csv("jdi_data_daily.csv").then(function(data){
     data.forEach(d => {
         d.date = parseDate(d.date);
         d.population = +d.population;
-    });
-    
+    });  
     console.log(data);
-});
-
 
 //Define x and y domains
-x.domain(d3.extent(dataset, d => d.date)); // Include all the dates from the dataset
-y.domain([0, d3.max(dataset, d => d.value)]); //The rangle starts from 0 and up to the max value that's in the dataset 
+x.domain(d3.extent(data, d => d.date)); // Include all the dates from the data
+y.domain([0, d3.max(data, d => d.population)]); //The rangle starts from 0 and up to the max value that's in the data 
 
 // Add x-axis
 svg.append("g")
@@ -49,12 +46,14 @@ svg.append("g")
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
   .x(d => x(d.date)) // Use the x scale to position dates
-  .y(d => y(d.value)); // Use the y scale to position values
+  .y(d => y(d.population)); // Use the y scale to position values
 
 // Add line path to SVG element
 svg.append("path")
-  .datum(dataset)  // Binds the dataset to the path
+  .datum(data)  // Binds the data to the path
   .attr("fill", "none")  // No fill under the line
   .attr("stroke", "steelblue") // Set the line color
   .attr("stroke-width", 1) // Sets the thickness of the line
   .attr("d", line); // Use the line generator to create the path
+ 
+});
