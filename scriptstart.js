@@ -30,18 +30,19 @@ d3.csv("jdi_data_daily.csv").then(function(data){
 
 //Define x and y domains
 x.domain(d3.extent(data, d => d.date)); // Include all the dates from the data
-y.domain([0, d3.max(data, d => d.population)]); //The rangle starts from 0 and up to the max value that's in the data 
+y.domain([65000, d3.max(data, d => d.population)]); //The rangle starts from 0 and up to the max value that's in the data 
 
 // Add x-axis
 svg.append("g")
   .attr("transform", `translate(0, ${height})`) // Moves(translates) the x-axis group element to the bottom of the chart
   .call(d3.axisBottom(x)
-    .ticks(d3.timeMonth.every(1))         // Format how many ticks/what interval
+    .ticks(d3.timeMonth.every(6))         // Format how many ticks/what interval
     .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
 
 // Add y-axis
 svg.append("g")
-  .call(d3.axisLeft(y))
+  .call(d3.axisLeft(y)
+  .ticks((d3.max(data, d => d.population) - 65000)/ 5000)) // Make the size limited to every 5000 population
 
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
