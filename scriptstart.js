@@ -10,5 +10,13 @@ const x = d3.scaleTime()
 const y = d3.scaleLinear()
    .range([height, 0]);
 
+   // Create SVG element and append it to the chart container
+   const svg = d3.select("#chart-container") 
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("tranform", `translate(${margin.left}, ${margin.top})`);
+
 
 
