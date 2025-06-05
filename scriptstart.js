@@ -35,3 +35,7 @@ const dataset = [
 ];
 
 console.log(dataset);
+
+//Define x and y domains
+x.domain(d3.extent(dataset, d => d.date)); // Include all the dates from the dataset
+y.domain([0, d3.max(dataset, d => d.value)]); //The rangle starts from 0 and up to the max value that's in the dataset 
