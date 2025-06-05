@@ -39,3 +39,10 @@ console.log(dataset);
 //Define x and y domains
 x.domain(d3.extent(dataset, d => d.date)); // Include all the dates from the dataset
 y.domain([0, d3.max(dataset, d => d.value)]); //The rangle starts from 0 and up to the max value that's in the dataset 
+
+// Add x-axis
+svg.append("g")
+//   .attr("transform", `translate(0, ${height})`)
+  .call(d3.axisBottom(x)
+    .ticks(d3.timeMonth.every(1))         // Format how many ticks/what interval
+    .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
