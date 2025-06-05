@@ -35,10 +35,16 @@ y.domain([65000, d3.max(data, d => d.population)]); //The rangle starts from 0 a
 // Add x-axis
 svg.append("g")
   .attr("transform", `translate(0, ${height})`) // Moves(translates) the x-axis group element to the bottom of the chart
+  .style("fonr-size", "14px") // Set font size to make 14
   .call(d3.axisBottom(x)
-    .ticks(d3.timeMonth.every(6))         // Format how many ticks/what interval
-    .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
-    
+    .tickValues(x.ticks(d3.timeMonth.every(6)))         // Format how many ticks/what interval
+    .tickFormat(d3.timeFormat("%b %Y"))) // How tick labels displayed
+  .call(g => g.select(".domain").remove()) // this removes th entire axis line
+  .selectAll(".tick line") // Select all individual lines 
+  .style("stroke-opacity", 0) // Make lines to dissapear
+svg.selectAll(".tick text") // Grab the tick text to 
+  .attr("fill", "#777");    // change the colour
+
 
 // Add y-axis
 svg.append("g")
@@ -47,7 +53,7 @@ svg.append("g")
   .tickFormat(d => {
     return `${(d / 1000).toFixed(0)}k`;
   }))
-  
+
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
   .x(d => x(d.date)) // Use the x scale to position dates
