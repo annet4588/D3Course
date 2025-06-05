@@ -38,12 +38,16 @@ svg.append("g")
   .call(d3.axisBottom(x)
     .ticks(d3.timeMonth.every(6))         // Format how many ticks/what interval
     .tickFormat(d3.timeFormat("%b %Y"))); // How tick labels displayed
+    
 
 // Add y-axis
 svg.append("g")
   .call(d3.axisLeft(y)
-  .ticks((d3.max(data, d => d.population) - 65000)/ 5000)) // Make the size limited to every 5000 population
-
+  .ticks((d3.max(data, d => d.population) - 65000)/ 5000) // Make the size limited to every 5000 population
+  .tickFormat(d => {
+    return `${(d / 1000).toFixed(0)}k`;
+  }))
+  
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
   .x(d => x(d.date)) // Use the x scale to position dates
