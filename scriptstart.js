@@ -139,12 +139,19 @@ listeningRect.on("mousemove", function(event){
 circle.attr("cx", xPos)
       .attr("cy", yPos);
 console.log(xPos);
-});
 
 // Add transition for the circle radius - animate the circle's radius
 circle.transition()
   .duration(50) // Transition - 50ms
   .attr("r", 5); // Radius - 5px
+
+// Add in our tooltip
+tooltip
+  .style("display", "block")
+  .style("left", `${xPos + 100}px`)
+  .style("top", `${yPos + 50}px`)
+  .html(`<strong>Date:</strong> ${d.date.toLocaleDateString()}<br><strong>Population:</strong> ${d.population.toLocaleString()}`)
+});
 
 // Add Y-axis label 
 svg.append("text")
