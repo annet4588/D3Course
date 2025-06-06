@@ -133,8 +133,18 @@ listeningRect.on("mousemove", function(event){
   const d = x0 - d0.date > d1.date - x0 ? d1 : d0;
   const xPos = x(d.date);
   const yPos = y(d.population);
-})
 
+
+//Update the circle position on mouse move
+circle.attr("cx", xPos)
+      .attr("cy", yPos);
+console.log(xPos);
+});
+
+// Add transition for the circle radius - animate the circle's radius
+circle.transition()
+  .duration(50) // Transition - 50ms
+  .attr("r", 5); // Radius - 5px
 
 // Add Y-axis label 
 svg.append("text")
