@@ -10,13 +10,18 @@ const x = d3.scaleTime()
 const y = d3.scaleLinear()
    .range([height, 0]);
 
-   // Create SVG element and append it to the chart container
-   const svg = d3.select("#chart-container") 
-      .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+// Create SVG element and append it to the chart container
+const svg = d3.select("#chart-container") 
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+ //Create tooltip div
+const tooltip = d3.select("body")
+  .append("div")
+  .attr("class", "tooltip");
 
 // Load and process the data
 d3.csv("jdi_data_daily.csv").then(function(data){
@@ -95,13 +100,21 @@ const line = d3.line()
   .y(d => y(d.population)); // Use the y scale to position values
 
 // Add line path to SVG element
-svg.append("path")
+const path = svg.append("path")
   .datum(data)  // Binds the data to the path
   .attr("fill", "none")  // No fill under the line
   .attr("stroke", "steelblue") // Set the line color
   .attr("stroke-width", 1) // Sets the thickness of the line
   .attr("d", line); // Use the line generator to create the path
- 
+
+// Add a circle element
+const circle = svg.append("circle")
+  .attr("r", 0)
+  .attr("fill", "steelblue")
+  .style("stroke", "white")
+  .attr("opacity", .70)
+  .style("pointer-events", "none");
+
 // Add Y-axis label 
 svg.append("text")
   .attr("transform", "rotate(-90)")
