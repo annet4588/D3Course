@@ -153,6 +153,15 @@ tooltip
   .html(`<strong>Date:</strong> ${d.date.toLocaleDateString()}<br><strong>Population:</strong> ${d.population.toLocaleString()}`)
 });
 
+// Listening rectangle mouse leave function
+listeningRect.on("mouseleave", function(){
+  circle.transition()
+    .duration(50)
+    .attr("r", 0); // Shrinks the highlight circle to disappear
+  
+  tooltip.style("display", "none"); // Hides the tooltip
+});
+
 // Add Y-axis label 
 svg.append("text")
   .attr("transform", "rotate(-90)")
