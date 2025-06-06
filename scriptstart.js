@@ -67,6 +67,28 @@ svg.append("g")
     }
     });
 
+// Add vertical gridlines
+svg.selectAll("xGrid")
+  .data(x.ticks(d3.timeMonth.every(6)))
+  .join("line")
+  .attr("x1", d => x(d))
+  .attr("x2", d => x(d))
+  .attr("y1", 0)//Set the beggining point for each line
+  .attr("y2", height)//Set the end point
+  .attr("stroke", "#e0e0e0") //Colour light grey
+  .attr("stroke-width", .5)
+
+// Add horisontal gridlines
+svg.selectAll("yGrid")
+  .data(y.ticks((d3.max(data, d => d.population) - 65000)/ 5000).slice(1))
+  .join("line")
+  .attr("x1", 0) //Set the beggining point for each line
+  .attr("x2", width) //Set the end point
+  .attr("y1", d => y(d))
+  .attr("y2", d => y(d))
+  .attr("stroke", "#e0e0e0") 
+  .attr("stroke-width", .5)
+
 // Create line generator that maps each data point to an x and y position based on the scales
 const line = d3.line()
   .x(d => x(d.date)) // Use the x scale to position dates
