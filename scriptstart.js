@@ -102,4 +102,34 @@ svg.append("path")
   .attr("stroke-width", 1) // Sets the thickness of the line
   .attr("d", line); // Use the line generator to create the path
  
+// Add Y-axis label 
+svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left)
+  .attr("x", 0 - (height/2))
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .style("font-size", "14px")
+  .style("fill", "#777")
+  .style("font-family", "sans-serif")
+  .text("Population")
+
+//Add the chart title
+svg.append("text")
+  .attr("class", "chart-title")
+  .attr("x", margin.left - 115)
+  .attr("y", margin.top - 100)
+  .style("fint-size", "24px")
+  .style("font-weight", "bold")
+  .style("font-family", "sans-serif")
+  .text("Prison Population in the US Have Trended Upward Since Summer 2020.")
+
+// Add source credit
+svg.append("text")
+  .attr("class", "source-credit")
+  .attr("x", width - 1125)
+  .attr("y", height + margin.bottom - 3)
+  .style("font-size", "9px")
+  .style("font-family", "sans-serif")
+  .text("Source: jaildatainitiative.org")
 });
