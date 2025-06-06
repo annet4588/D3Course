@@ -115,6 +115,27 @@ const circle = svg.append("circle")
   .attr("opacity", .70)
   .style("pointer-events", "none");
 
+// Create the SVG element and append it to the chart container
+
+// Declare a listening rectangle
+const listeningRect = svg.append("rect")
+  .attr("width", width)
+  .attr("height", height);
+
+// Create the mouse move function
+listeningRect.on("mousemove", function(event){
+  const [xCoord] = d3.pointer(event, this);
+  const bisectDate = d3.bisector(d => d.date).left;
+  const x0 = x.invert(xCoord);
+  const i = bisectDate(data, x0, 1);
+  const d0 = data[i - 1];
+  const d1 = data[i];
+  const d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+  const xPos = x(d.date);
+  const yPos = y(d.population);
+})
+
+
 // Add Y-axis label 
 svg.append("text")
   .attr("transform", "rotate(-90)")
