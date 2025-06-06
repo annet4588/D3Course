@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Chart</title>
+    <title>Visualising US Jail Population Data</title>
+    <style>
+        /* Make the invisible rects responsive to mouse events for tooltips */
+        rect{
+            pointer-events: all; /* Enables mouse interaction */
+            fill-opacity: 0;     /* Makes the rect fully transparent */
+            stroke-opacity: 0;   /* Hides any stroke */
+            z-index:1;           /* Ensures it's on top for interaction */
+        }
+         /* Tooltip styling for displaying data on hover */
+        .tooltip{
+            position: absolute;   /* Allows positioning anywhere on the screen */
+            padding: 10px;
+            background-color: steelblue;
+            color: white;
+            border: 1px solid white;
+            border-radius: 10px;
+            display: none;
+            opacity: .75;
+        }
+    </style>
 </head>
 <body>
     <div id="chart-container">
